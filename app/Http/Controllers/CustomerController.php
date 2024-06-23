@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\customer;
 use App\Http\Requests\StorecustomerRequest;
 use App\Http\Requests\UpdatecustomerRequest;
+use Inertia\Inertia;
+
 
 class CustomerController extends Controller
 {
@@ -13,9 +15,11 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
+      $customers = customer::all();
+      return inertia::render('Customers',[
+        'customers' => $customers
+      ]);
     }
-
     /**
      * Show the form for creating a new resource.
      */

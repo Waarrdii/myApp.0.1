@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\CustomerController;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -18,9 +19,9 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/customers', function () {
-    return Inertia::render('Customers');
-})->middleware(['auth', 'verified'])->name('customers');
+Route::get('/customers', [CustomerController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('customers');
 
 Route::get('/vendors', function () {
     return Inertia::render('Vendors');
