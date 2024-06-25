@@ -1,23 +1,19 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
+import DataTable from '@/Components/DataTable.vue';
 
-const props = defineProps({
-    customers : Array
+const tableData = defineProps({
+    customers : Array,
 })
 
-
-
+const headerColumn = Object.keys(tableData.customers[0]);
 </script>
 
 <template>
-    <Head title="Dashboard" />
+    <Head title="Dashboard"/>
 
     <AuthenticatedLayout>
-       <ul>
-        <li v-for="customer in customers" :key="customer.id">
-            {{ customer.id }} | {{ customer.nama }} | {{ customer.alamat }} 
-        </li>
-       </ul>
+       <DataTable  :tableData="customers" :headerColumn="headerColumn"></DataTable>
     </AuthenticatedLayout>
 </template>
