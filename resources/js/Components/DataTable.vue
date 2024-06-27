@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full overflow-x-auto h-[500px]">
+    <div class="w-full overflow-x-scroll h-[500px] scrollbar rounded-lg">
         <table class="table-fixed text-nowrap">
             <thead>
                 <tr>
