@@ -14,7 +14,7 @@ const headerColumn = Object.keys(tableData.customers[0]);
     <Head title="Dashboard"/>
 
     <AuthenticatedLayout>
-        <div class="w-1/2 mx-2 my-2">
+        <div class="mx-2 my-2">
             <DataTable  :tableData="customers" :headerColumn="headerColumn"></DataTable>
         </div>
        

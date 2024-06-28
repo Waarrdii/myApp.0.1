@@ -3,14 +3,25 @@
         <table class="table-fixed text-nowrap">
             <thead>
                 <tr>
-                    <th v-show="header !== 'id' && header !== 'created_at' && header !== 'updated_at'" scope="col" class="sticky top-0 px-3 font-bold py-3 text-start text-sm uppercase bg-gray-300 border-none" v-for="header in headerColumn" :key="header">
-                        {{ header }}
+                    <th @click="sortColumn(header)"  v-show="header !== 'id' && header !== 'created_at' && header !== 'updated_at'" scope="col"
+                        class="box-border sticky top-0 px-3 font-bold py-3 text-start text-sm uppercase bg-gray-300 border-none cursor-pointer select-none"
+                        v-for="header in headerColumn" :key="header">
+                        <div class="flex items-baseline">
+                            <span>{{ header }}</span>
+                            <div class="relative bg-slate-600">
+                                <span class="triangle-up absolute bottom-0 left-0"
+                                    :class="sortedColumn === header && ascendingOrder ? 'visible' : 'invisible'"></span>
+                                <span class="triangle-down absolute -top-2 left-0"
+                                    :class="sortedColumn === header && !ascendingOrder ? 'visible' : 'invisible'"></span>
+                            </div>
+                        </div>
                     </th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="item in tableData" :key="item.id" class="odd:bg-white even:bg-slate-200">
-                    <td v-show="col !== 'id' && col !== 'created_at' && col !== 'updated_at'" class="text-sm px-3" v-for="col in headerColumn" :key="col" >
+                    <td v-show="col !== 'id' && col !== 'created_at' && col !== 'updated_at'" class="text-sm px-3"
+                        v-for="col in headerColumn" :key="col">
                         {{ item[col] }}
                     </td>
                 </tr>
@@ -28,6 +39,36 @@ const props = defineProps({
     headerColumn: Array,
 })
 
+let ascendingOrder = ref(true);
+let sortedColumn = ref(null);
+
+const sortColumn = (header) => {
+    ascendingOrder.value = !ascendingOrder.value;
+    sortedColumn.value = header;
+    console.log(ascendingOrder.value);
+    console.log(sortedColumn.value);
+}
+
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.triangle-up {
+    content: "";
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 8px solid black;
+    margin-left: 2px;
+}
+
+.triangle-down {
+    content: "";
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 8px solid black;
+    margin-left: 2px;
+}
+</style>
