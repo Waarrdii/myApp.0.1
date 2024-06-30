@@ -32,7 +32,7 @@
 </template>
 
 <script setup>
-import { ref, defineProps } from 'vue';
+import { ref, reactive } from 'vue';
 
 const props = defineProps({
     tableData: Array,
@@ -41,12 +41,34 @@ const props = defineProps({
 
 let ascendingOrder = ref(true);
 let sortedColumn = ref(null);
+const sortableData = ref(null);
 
 const sortColumn = (header) => {
     ascendingOrder.value = !ascendingOrder.value;
     sortedColumn.value = header;
-    console.log(ascendingOrder.value);
-    console.log(sortedColumn.value);
+    sortableData.value = reactive(props.tableData);
+    // console.log(ascendingOrder.value);
+    // console.log(sortedColumn.value);
+    // console.log(sortableData.value);
+    sortData();
+}
+
+const compareValue = (a,b) => {
+    if (typeof a === 'string' && typeof b === 'string'){
+        return a.localeCompare(b);
+    }else if (typeof a === 'number' && typeof b === 'number'){
+        return a - b;
+    }
+    return 0;
+}
+
+const sortData = ()=> {
+    sortableData.value.sort((a,b) =>{
+        const dataA = a[sortedColumn.value];
+        const dataB = b[sortedColumn.value];
+        return ascendingOrder.value ? compareValue(dataA, dataB) : compareValue(dataB,dataA);
+        // return ascendingOrder.value ? dataA.localeCompare(dataB) : dataB.localeCompare(dataA);
+    })
 }
 
 </script>
