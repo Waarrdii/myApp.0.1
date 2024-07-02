@@ -3,11 +3,16 @@
         <table class="table-fixed text-nowrap">
             <thead>
                 <tr>
+                    <th class="box-border sticky top-0 px-3 font-bold py-3 text-start text-sm uppercase bg-gray-300 border-none cursor-pointer select-none">
+                        Select
+                        <!-- ketik di klik, maka akan select all dan diselect all. -->
+                    </th>
+                    
                     <th @click="sortColumn(header)"  v-show="header !== 'id' && header !== 'created_at' && header !== 'updated_at'" scope="col"
                         class="box-border sticky top-0 px-3 font-bold py-3 text-start text-sm uppercase bg-gray-300 border-none cursor-pointer select-none"
                         v-for="header in headerColumn" :key="header">
                         <div class="flex items-baseline">
-                            <span>{{ header }}</span>
+                             <span>{{ header }}</span>
                             <div class="relative bg-slate-600">
                                 <span class="triangle-up absolute bottom-0 left-0"
                                     :class="sortedColumn === header && ascendingOrder ? 'visible' : 'invisible'"></span>
@@ -20,6 +25,9 @@
             </thead>
             <tbody>
                 <tr v-for="item in tableData" :key="item.id" class="odd:bg-white even:bg-slate-200">
+                    <td class="text-sm px-3">
+                        <input  type="checkbox"/>
+                    </td>
                     <td v-show="col !== 'id' && col !== 'created_at' && col !== 'updated_at'" class="text-sm px-3"
                         v-for="col in headerColumn" :key="col">
                         {{ item[col] }}
