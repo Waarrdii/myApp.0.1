@@ -20,17 +20,11 @@ import { router } from '@inertiajs/vue3';
 
 
 let search = ref("")
-const currentPath = window.location.pathname;
 
+const currentPath = route().current();
 
 watch(search, (value)=>{
-    if(search.value){
-        // console.log('Path saat ini:', currentPath);
         router.get(currentPath, { search: value }, { preserveState: true });
-    }else{
-        router.get(currentPath);
-    }
-    
 })
 </script>
 
