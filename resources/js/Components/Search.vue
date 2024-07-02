@@ -25,7 +25,7 @@ const currentPath = window.location.pathname;
 
 watch(search, (value)=>{
     if(search.value){
-        console.log('Path saat ini:', currentPath);
+        // console.log('Path saat ini:', currentPath);
         router.get(currentPath, { search: value }, { preserveState: true });
     }else{
         router.get(currentPath);
