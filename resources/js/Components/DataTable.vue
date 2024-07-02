@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full border border-gray-400 overflow-x-scroll h-[500px] scrollbar rounded-lg ">
+    <div class="w-full border border-gray-400 overflow-x-scroll max-h-full scrollbar rounded-lg ">
         <table class="table-fixed text-nowrap">
             <thead>
                 <tr>
