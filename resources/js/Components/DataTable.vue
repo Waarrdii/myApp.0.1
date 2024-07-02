@@ -1,15 +1,16 @@
 <template>
-    <div class="w-full border border-gray-400 overflow-x-scroll max-h-full scrollbar rounded-lg ">
+    <div class="py-3 bg-cyan-200">test</div>
+    <div class="border border-gray-400 overflow-auto relative rounded-lg scrollbar">
         <table class="table-fixed text-nowrap">
-            <thead>
+            <thead class="sticky top-0 ">
                 <tr>
-                    <th class="box-border sticky top-0 px-3 font-bold py-3 text-start text-sm uppercase bg-gray-300 border-none cursor-pointer select-none">
+                    <th class="box-border px-3 font-bold py-3 text-start text-sm uppercase bg-gray-300 border-none cursor-pointer select-none">
                         Select
                         <!-- ketik di klik, maka akan select all dan diselect all. -->
                     </th>
                     
                     <th @click="sortColumn(header)"  v-show="header !== 'id' && header !== 'created_at' && header !== 'updated_at'" scope="col"
-                        class="box-border sticky top-0 px-3 font-bold py-3 text-start text-sm uppercase bg-gray-300 border-none cursor-pointer select-none"
+                        class="box-border px-3 font-bold py-3 text-start text-sm uppercase bg-gray-300 border-none cursor-pointer select-none"
                         v-for="header in headerColumn" :key="header">
                         <div class="flex items-baseline">
                              <span>{{ header }}</span>
@@ -23,7 +24,7 @@
                     </th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody >
                 <tr v-for="item in tableData" :key="item.id" class="odd:bg-white even:bg-slate-200">
                     <td class="text-sm px-3">
                         <input  type="checkbox"/>
@@ -36,6 +37,7 @@
             </tbody>
         </table>
     </div>
+    <div class="py-3 bg-cyan-200">test</div>
 
 </template>
 
