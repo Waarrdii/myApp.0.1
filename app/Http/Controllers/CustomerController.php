@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\customer;
 use App\Http\Requests\StorecustomerRequest;
 use App\Http\Requests\UpdatecustomerRequest;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 
 
@@ -13,12 +14,16 @@ class CustomerController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-      $customers = customer::all();
-      return inertia::render('Customers',[
-        'customers' => $customers
-      ]);
+        $search = $request->query('search');
+        $customers = Customer::where('nama', 'like', "%$search%")
+                                    ->orwhere('customer_id', 'like', "%$search%")
+                                    ->get();
+        return inertia::render('Customers', [
+            'customers' => $customers,
+            'search' => $search,
+        ]);
     }
     /**
      * Show the form for creating a new resource.

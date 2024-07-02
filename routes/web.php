@@ -22,7 +22,6 @@ Route::get('/dashboard', function () {
 Route::get('/customers', [CustomerController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('customers');
-
 Route::get('/vendors', function () {
     return Inertia::render('Vendors');
 })->middleware(['auth', 'verified'])->name('vendors');

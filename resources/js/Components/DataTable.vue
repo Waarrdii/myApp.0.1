@@ -1,6 +1,7 @@
 <template>
-    <div class="py-3 bg-cyan-200">test</div>
-    <div class="border border-gray-400 overflow-auto relative rounded-lg scrollbar">
+<div class="w-5/6 flex flex-col overflow-hidden mx-auto">
+    <Search></Search>
+    <div class="border border-gray-400 overflow-scroll relative rounded-lg w-full mb-5">
         <table class="table-fixed text-nowrap">
             <thead class="sticky top-0 ">
                 <tr>
@@ -37,12 +38,15 @@
             </tbody>
         </table>
     </div>
-    <div class="py-3 bg-cyan-200">test</div>
+
+</div>
+    
 
 </template>
 
 <script setup>
 import { ref, reactive } from 'vue';
+import Search from '@/Components/Search.vue'
 
 const props = defineProps({
     tableData: Array,
@@ -52,6 +56,7 @@ const props = defineProps({
 let ascendingOrder = ref(true);
 let sortedColumn = ref(null);
 const sortableData = ref(null);
+
 
 const sortColumn = (header) => {
     ascendingOrder.value = !ascendingOrder.value;
